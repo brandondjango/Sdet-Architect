@@ -99,4 +99,38 @@ It is especially important to keep an eye on open source libraries. Looking at y
 
 ## Web Application Software Automation
 
-At all phases of my career I have worked
+Web Application Testing is the biggest use case of automated testing in the software industry.  As such, there's a lot of resources, tools, community, and knowledge widely available to automators.  I will discuss some of them here, but it's important to note what really separates good testers/automators in this space is fundamental understanding of core principles, rather than automating some point and click action.
+
+### Tool choice for Webdriver Automation
+
+In our diagram above, we mentioned how external dependencies fit in a Test Project architecture. Because WebApps(and "derivative" technology such as Hybrid mobile apps) are so popular, browser automation tool choice play a big part in determining the direction of your Automation project.
+
+#### Free Tool: Selenium
+
+Selenium, for example, is hands down the biggest player in this space. It is a **free** open source tool that has been around pretty much since the beginning browser automation.  However, Selenium is not actually built for test automators in mind.  Rather, you combine the use of this tool with other libraries and conventions to build a WebApp test suites.
+
+This can allow you to be pretty flexible in your projects, but requires a greater degree of know how from maintainers of your test project, especially if you want to manage things like parallelzation and test reports efficiently.
+
+#### Paid Tool: Cypress
+
+On the other end of the spectrum, there are a lot of paid tools made specifically with testers in mind. In my opinion, [Cypress](https://www.cypress.io/) is the biggest up and comer taking over this space.
+
+The best analogy I've heard comparing Selenium to Cypress is if Selenium is a tool that remote controls a browser, Cypress is a tool embedded within a browser. There are tons of out of the box features automator need to build big scalable projects that are too numerous to name here, and it looks really cool in action.
+
+The reservations I have for really any tool like Cypress is you are really beholden to it.  You have to pay for licences. There's a flexibility you lack with it you might need on test suites that have complicated tests hitting APIs, Databases, etc.  The community is just not there yet. Cypress specifically does not support Firefox even.
+
+This might not be too bad if you for example only want to automate components of Web Apps, you just need to make a wise choice for your shop.
+
+### Example projects
+
+I personally have been in the Web Browser automation game since I started my career. Here are some examples of Web Browser automation I have on my github page using Selenium([Watir](http://watir.com/)).  They are in Ruby, but I have worked professionally in Java as well:
+
+- [Bare bones project that can serve as a starter for a Web App Automation project using Ruby, Watir, Cucumber](https://github.com/brandondjango/WebAppAutomation)
+
+- [Name Game Testing project I did in 24 hours for a Job Interview Process](https://github.com/brandondjango/NameGameTesting)
+
+
+
+
+
+
