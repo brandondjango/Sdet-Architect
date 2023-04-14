@@ -9,6 +9,10 @@
    3. [Application Control](#application-control)
    4. [External Dependencies](#external-dependencies)
 4. [Web Application Testing](#web-application-software-automation)
+   1. [Tool choice for Webdriver Automation](#tool-choice-for-webdriver-automation)
+      1. [Free Tool: Selenium](#free-tool--selenium)
+      2. [Paid Tool: Cyrpess](#paid-tool--cypress)
+   2. [Example Projects](#example-web-automation-projects)
 
 ## Purpose
 
@@ -121,7 +125,7 @@ The reservations I have for really any tool like Cypress is you are really behol
 
 This might not be too bad if you for example only want to automate components of Web Apps, you just need to make a wise choice for your shop.
 
-### Example projects
+### Example Web Automation Projects
 
 I personally have been in the Web Browser automation game since I started my career. Here are some examples of Web Browser automation I have on my github page using Selenium([Watir](http://watir.com/)).  They are in Ruby, but I have worked professionally in Java as well:
 
