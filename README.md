@@ -240,7 +240,7 @@ It can just take a minute to get started.
 
 ### More?
 
-Nope. There are too many considerations to further expand on this topic, but I'm always happy to have a conversation about it!
+Nope. There are too many considerations to further expand on this topic *here*, but I'm always happy to have a conversation about it!
 
 ### Example Mobile Projects:
 
