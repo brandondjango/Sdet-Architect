@@ -46,6 +46,8 @@ The list goes on and on, but time is finite.
 
 Automated Software Testing helps us organizations and departments by cutting into the time it takes us to assess our applications on a variety of levels.
 
+---
+
 ## Overall Methodology in Testing Automation Structure
 
 For the most part, all Software Testing Projects consist of 3 to 4 parts(depending on how you look at it):
@@ -106,6 +108,8 @@ External dependency considerations for a test project are the same as all projec
 It is especially important to keep an eye on open source libraries. Looking at your Ruby gem rest-client.
 
 
+---
+
 
 ## Web Application Software Automation
 
@@ -138,6 +142,9 @@ I personally have been in the Web Browser automation game since I started my car
 - [Bare bones project that can serve as a starter for a Web App Automation project using Ruby, Watir, Cucumber](https://github.com/brandondjango/WebAppAutomation)
 
 - [Name Game Testing project I did in 24 hours for a Job Interview Process](https://github.com/brandondjango/NameGameTesting)
+
+
+---
 
 ## Mobile and Smart Device Automation
 
