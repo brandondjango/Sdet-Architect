@@ -13,6 +13,12 @@
       1. [Free Tool: Selenium](#free-tool--selenium)
       2. [Paid Tool: Cyrpess](#paid-tool--cypress)
    2. [Example Projects](#example-web-automation-projects)
+5. [Mobile Testing](#mobile-and-smart-device-automation)
+   1. [Appium](#appium)
+      1. [Woah...](#woah-woah-woah---that-was-a-lot)
+      2. [Why Bother](#so-why-bother-if-its-so-hard-to-setup)
+   2. [More...?](#more)
+   3. [Example Mobile Projects](#example-mobile-projects-)
 
 ## Purpose
 
@@ -133,7 +139,105 @@ I personally have been in the Web Browser automation game since I started my car
 
 - [Name Game Testing project I did in 24 hours for a Job Interview Process](https://github.com/brandondjango/NameGameTesting)
 
+## Mobile and Smart Device Automation
 
+Mobile Device Automation can have a high bar to entry and maintain, but it can be a very useful tool in maintaining the quality of mobile applications and webapps.
+
+The basic layout is the same as we mentioned before as far as overall structure. What seperates the mobile space from others is the pace at which it moves. Nearly every fall, major versions of Android and iOS(Apple mobile OS) are released. New devices and features are developed by companies ever competing to stay ahead of each other, and if you aren't keeping up with the landscape, you can catch yourself in a dependency/version specific nightmare.
+
+Fortunately, living at that pace(at least at some point) is a good skill to have in your toolbelt :)
+
+Another important skill to know about is Appium! 
+
+### Appium
+
+Appium is the biggest player in the mobile automation space. It is a library built on Selenium specifically for controlling/driving Mobile simulators and real devices.
+
+Fortunately for us, it slots right into the external dependency/application control layer of our test project structure! For example, here is how you might open a Appium Driver for various devices, and control a browser on said device
+
+```agsl
+    def create_iphonex_safari_driver
+        helper = DriverHelper.new
+        helper.create_ios_simulator_safari(browserName: "Safari", platformVersion: "13.5", deviceName: "iPhone X")
+    end    
+```
+
+From there, you will have access to an object that actually controls the device in realtime! You can use the driver to go to webpages, access elements on the page, etc.
+
+Easy enough, right?
+
+Well.... Lets look at that "create_ios_simulator_safari" method:
+
+```agsl
+    def create_ios_simulator_safari(browserName:, platformVersion:, deviceName:)
+      #pull initial capabilities from template
+      options = YAML.load(File.read(File.join(__dir__, "driver_templates/ios_simulator.yml")))
+
+      #populate capabilities with arguments
+      options["caps"]["browserName"] = browserName
+      options["caps"]["platformVersion"] = platformVersion
+      options["caps"]["deviceName"] = deviceName
+
+      #create and start driver
+      @driver = Appium::Driver.new(options, true)
+      @driver.start_driver
+
+      #return Appium driver
+      return @driver
+    end
+```
+
+And then that yaml template driver:
+
+```agsl
+#iOS simulator template
+
+#no udid required for simulator
+caps:
+  platformName: 'iOS'
+  #platformVersion: '11.0'  #Required
+  #deviceName: 'iPhone 8'   #Required, grab from "xcrun simctl list"
+  automationName: 'XCUITest'
+  xcodeOrgID: '6N85WEFMZV'
+  xcodeSigningId: 'iPhone Developer'
+  newCommandTimeout: 1800
+  clearSystemFiles: 'true'
+  showXcodeLog: 'true'
+  useCarthageSsl: 'true'
+  updatedWDABundleId: '-N85WEFMZV.WebDriverAgentRunner'
+  webkitResponseTimeout: 10000
+  startIWDP: true
+
+appium_lib:
+  server_url: 'http://0.0.0.0:4723/wd/hub/'
+```
+
+And then there's the [setup to actually run Appium and get it connected to your devices.](https://github.com/brandondjango/MobileTestAutomation)
+
+#### Woah Woah Woah - That was a lot
+
+**Yup.** Keep in mind, we have not discussed factors like:
+- Is my app native or hybrid?
+- How many OS versions should I support?
+- Should I maintain real devices, or run my automation on Virtual or Hosted devices?(BrowserStack for example will host virtual mobnile devices)
+
+These are some of the first questions you need to answer *after* you make the decision to use Appium.
+
+#### So why bother if it's so hard to setup?
+
+**^Not the first time that question has been asked.**
+
+In my opinion, the reason we want to use Appium is really the same as our other automation tools. Time savings, repeatability, removal of user error in test execution, repeatability, fast coverage. If anything, the savings in the fast paced world of mobile development increase in magnitude using automation.
+
+It can just take a minute to get started.
+
+### More?
+
+Nope. There are too many considerations to further expand on this topic, but I'm always happy to have a conversation about it!
+
+### Example Mobile Projects:
+
+[Bare Bones Mobile Automation Project](https://github.com/brandondjango/MobileTestAutomation)
 
 
 
