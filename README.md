@@ -11,7 +11,7 @@
 4. [Web Application Testing](#web-application-software-automation)
    1. [Tool choice for Webdriver Automation](#tool-choice-for-webdriver-automation)
       1. [Free Tool: Selenium](#free-tool--selenium)
-      2. [Paid Tool: Cyrpess](#paid-tool--cypress)
+      2. [Paid Tool: Cypress](#paid-tool--cypress)
    2. [Example Projects](#example-web-automation-projects)
 5. [Mobile Testing](#mobile-and-smart-device-automation)
    1. [Appium](#appium)
@@ -19,6 +19,7 @@
       2. [Why Bother](#so-why-bother-if-its-so-hard-to-setup)
    2. [More...?](#more)
    3. [Example Mobile Projects](#example-mobile-projects-)
+6. [Performance Testing]()
 
 ## Purpose
 
@@ -240,12 +241,16 @@ It can just take a minute to get started.
 
 ### More?
 
+![appium.png](appium.png)
+
 Nope. There are too many considerations to further expand on this topic *here*, but I'm always happy to have a conversation about it!
 
 ### Example Mobile Projects:
 
 [Bare Bones Mobile Automation Project](https://github.com/brandondjango/MobileTestAutomation)
 
+## Performance Testing
 
+Admittedly, this is the 
 
 
