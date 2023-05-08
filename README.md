@@ -249,30 +249,8 @@ Nope. There are too many considerations to further expand on this topic *here*, 
 
 [Bare Bones Mobile Automation Project](https://github.com/brandondjango/MobileTestAutomation)
 
----
-
 ## Performance Testing
 
-Admittedly, this is an area I do not have as much hands on experience as others, but I have used tools to simulate load tests and measure performance in a limited capacity.
-
-The biggest player in this field is jmeter as far as free tools.  It has a lot of functionality and out of the box functionality.  However, I know very little about it other than some cursory looks.
-
-As far as paid tools, I've seen some like Blaze meter that also offer some great features, which I also don't know a terrible amount about.
-
-If I know nothing about either of these, why did I include this section?
-
-One word: Locust.
-
-### Locust
-
-In my opinion, [Locust](https://locust.io/) is one of the tools I've found easiest to pick up and conceptually extrapolate on its capabilities.
-
-It is a free, open source Python performance tool. It offers an intuitive UI to read results, a system for distributed load testing, and it's capabilities extend as far as your Python skills will let you!
-
-Let's take a closer look.
-
-#### How does Locust work at a high level?
-
-
+Admittedly, this is the 
 
 
