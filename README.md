@@ -147,9 +147,74 @@ This might not be too bad if you for example only want to automate components of
 
 I personally have been in the Web Browser automation game since I started my career. Here are some examples of Web Browser automation I have on my github page using Selenium([Watir](http://watir.com/)).  They are in Ruby, but I have worked professionally in Java as well:
 
-- [Bare bones project that can serve as a starter for a Web App Automation project using Ruby, Watir, Cucumber](https://github.com/brandondjango/WebAppAutomation)
+- [Bare-bones project that can serve as a starter for a Web App Automation project using Ruby, Watir, Cucumber](https://github.com/brandondjango/WebAppAutomation)
 
 - [Name Game Testing project I did in 24 hours for a Job Interview Process](https://github.com/brandondjango/NameGameTesting)
+
+---
+
+## API Testing
+
+API Testing is very useful and can come in a couple different flavors protocol wise(think gRPC, REST, and HTTP).
+
+From a high level, writing these tests is pretty simple: we want to write atomic, repeatable, lightweight tests that are easy to write. 
+
+The reason we want them to be easy to write is because generally you want to write way more API tests than UI tests. This is because there should be way more test cases for APIs as opposed to UI, and they can run very fast. We want tests to be atomic so we are very specific in what we are testing, lightweight so maintaining and debugging are easy, and finally repeatable so we can track results over time. 
+
+### Implementation
+
+There are so many ways to implement API tests, but in my experience, the best way to approach the solution to automated API testing is to create a general solution for getting and storing API responses at the high script level, and make validate at a high level as well.
+
+Let's dig into that with a REST Ruby/Cucumber example:
+
+#### REST
+
+First of all, you might be asking why I'm using Cucumber, a plain language test framework for business cases here. That's a good question. In this case, it was simply because the team I was on preferred to use a framework we already all knew. Moving on...
+
+Let's look at a sample test:
+
+```
+  Scenario: List all breeds
+    #behind the scenes we are providing host url information
+    When the request is built for "breeds/list/all"
+    And the "get" request is sent
+    Then the response contains the key "beagle"
+    Then the response contains the key "retriever" that contains the value "golden" within the value for that key
+    Then the response contains the key "status" with the value "success"
+```
+Reading this test, Look how simple and understandable it is: 
+1. We built a request
+2. We sent the request
+3. We have a response we are validating
+
+At the high level, we have a test that is:
+
+1. Easy to understand
+2. Scalable
+3. is virtually atomic(or easy to make atomic)
+
+Let's look at the response we actually got back from that call:
+
+```
+{"message":{"affenpinscher":[],"african":[],"airedale":[],"akita":[],"appenzeller":[],"australian":["shepherd"],"basenji":[],"beagle":[],"bluetick":[],"borzoi":[],"bouvier":[],"boxer
+":[],"brabancon":[],"briard":[],"buhund":["norwegian"],"bulldog":["boston","english","french"],"bullterrier":["staffordshire"],"cattledog":["australian"],"chihuahua":[],"chow":[],"cl
+umber":[],"cockapoo":[],"collie":["border"],"coonhound":[],"corgi":["cardigan"],"cotondetulear":[],"dachshund":[],"dalmatian":[],"dane":["great"],"deerhound":["scottish"],"dhole":[],
+"dingo":[],"doberman":[],"elkhound":["norwegian"],"entlebucher":[],"eskimo":[],"finnish":["lapphund"],"frise":["bichon"],"germanshepherd":[],"greyhound":["italian"],"groenendael":[],
+"havanese":[],"hound":["afghan","basset","blood","english","ibizan","plott","walker"],"husky":[],"keeshond":[],"kelpie":[],"komondor":[],"kuvasz":[],"labradoodle":[],"labrador":[],"l
+eonberg":[],"lhasa":[],"malamute":[],"malinois":[],"maltese":[],"mastiff":["bull","english","tibetan"],"mexicanhairless":[],"mix":[],"mountain":["bernese","swiss"],"newfoundland":[],
+"otterhound":[],"ovcharka":["caucasian"],"papillon":[],"pekinese":[],"pembroke":[],"pinscher":["miniature"],"pitbull":[],"pointer":["german","germanlonghair"],"pomeranian":[],"poodle
+":["medium","miniature","standard","toy"],"pug":[],"puggle":[],"pyrenees":[],"redbone":[],"retriever":["chesapeake","curly","flatcoated","golden"],"ridgeback":["rhodesian"],"rottweil
+er":[],"saluki":[],"samoyed":[],"schipperke":[],"schnauzer":["giant","miniature"],"segugio":["italian"],"setter":["english","gordon","irish"],"sharpei":[],"sheepdog":["english","shet
+land"],"shiba":[],"shihtzu":[],"spaniel":["blenheim","brittany","cocker","irish","japanese","sussex","welsh"],"spitz":["japanese"],"springer":["english"],"stbernard":[],"terrier":["a
+merican","australian","bedlington","border","cairn","dandie","fox","irish","kerryblue","lakeland","norfolk","norwich","patterdale","russell","scottish","sealyham","silky","tibetan","
+toy","welsh","westhighland","wheaten","yorkshire"],"tervuren":[],"vizsla":[],"waterdog":["spanish"],"weimaraner":[],"whippet":[],"wolfhound":["irish"]},"status":"success"}
+```
+
+If you examine this response, this is a multi level hash we're getting back, with Arrays withing hashes.  You cannot see this here, but within the step definition, we account for that. Because our tests are robust, even if that array were ten levels deepers, we would still find the values we're seeking.
+
+What we have here is a very robust step definition that searching for one case. And when you have several of these, they add up to be a strong suite of tests upon extrapolation.
+
+Personally, I have used this this approach and written 1000+ tests like this for one application.  When you have somethign like this, it is easy to see trends in functionality, helping you to pin-point bugs and specific behavior.
 
 
 ---
