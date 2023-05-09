@@ -19,13 +19,20 @@
       2. [Why Bother](#so-why-bother-if-its-so-hard-to-setup)
    2. [More...?](#more)
    3. [Example Mobile Projects](#example-mobile-projects-)
-6. [Performance Testing]()
+6. [Performance Testing](#performance-testing)
+   1. [Locust](#locust)
+      1. [How does Locust work at a high level?](#how-does-locust-work-at-a-high-level)
+      2. [Is it that simple](#is-it-that-simple)
+   2. [Distributed Load Test](#distributed-load-testing)
+      1. [Locust Distributed Load Testing](#locust-distributed-load-testing)
 
 ## Purpose
 
 The purpose of this project is to show the types of projects and technologies I've worked on and written pertaining to software testing.  I want to do this so I can architect Software testing solutions.
 
 All the work here I've either written from scratch or worked within heavily, and should understand to a high degree.
+
+Also, no, ChatGPT wrote none of this :)
 
 ## Quality in the Context of Automated Software Testing
 
@@ -289,16 +296,73 @@ Yes and no.
 
 One of the strengths of locust is how easy it is to plug and play with.  The example I have above took me little to no time to get spun up once I learned about locust.
 
-However, like all our other automated tools, the tools themselves don't determine the key areas of your app to test. It is still up to the tester to determine if they are effectively testing their app.  On top of that, I really didn't cover a lot of opther great features locust has.
+However, like all our other automated tools, the tools themselves don't determine the key areas of your app to test. It is still up to the tester to determine if they are effectively testing their app.  **On top of that**, I really didn't cover a lot of other great features locust has. There are a lot of other cool ways to leverage Locust to get the metrics you are looking for.
 
 We also have to consider sometimes a response time doesn't correlate to performance. If our system is posting messages to a bus or working asynchronously in some way, we're not going to get any actual metrics from our test with locust alone.
 
 Performance testing is a prime example of why it is important for developers and testers to work together on quality.  Sometimes there is no gold standard, you just have to make one for your system, and work together to find out where you stand now.
 
-### Distributed load testing
+### Distributed Load testing
 
+When executing performance testing, a lot of times you need to generate a "load" on the your system to discover the boundaries of its capabilities.  This can be hard to do on one machine, so Distributed Load Testing can be a tool in your arsenal to help overcome this problem.
 
+So what is Distributed Load Test? Put simply, it's when you recruit multiple machines to help you perform your test:
 
+![distributed-load-testing.png](distributed-load-testing.png)
 
+In this particular screenshot, you can see one machine would serve as the "master" machine(gathering metrics, providing parameters to the workers, compiling report, etc.), while the workers actually place the load on the system.
 
+#### Locust Distributed Load Testing
 
+Locust provides ways to do this as well! Once you have The master and worker machines on the same network/connected in someway, you simply need to:
+
+1. Have Locust installed on your machine with the appropriate pre reqs
+2. Have your locust project on both machines
+3. Start the locust projects with the appropriate configs
+
+For instance, in the Locust Dog example:
+
+Master machine:
+```
+locust.exe -f locust_dog_demo.py --conf .\config_files\master.conf
+```
+
+Master config file:
+```
+[master conf]
+master = true
+expect-workers = 1
+
+[runtime settings]
+#host = "https://dog.ceo/api/"
+#Number of users must always be greater than:
+#the number of user classes multiplied by the number of workers
+users = 3
+spawn-rate = .5
+locustfile = "./locust_dog_demo.py"
+run-time = 5s
+headless = false
+```
+
+Worker machine:
+```
+locust.exe -f locust_dog_demo.py --conf .\config_files\worker.conf
+```
+
+Worker config file:
+```
+[worker conf]
+worker = true
+locustfile = "./locust_dog_demo.py"
+#host = "https://dog.ceo/api/"
+```
+
+There are ways to integrate this with Docker as well, but that can be saved for another time.
+
+## Summary
+
+There are a lot of ways to do load testing! It's up to you and your teams to set the goals of your load tests, and make an actionable plan to get there. Personally I've found luck with Locust, but there are a lot of tools out there to use!
+
+## Sample Load test project:
+
+[Locust Dog API Project](https://github.com/brandondjango/LocustDogDemo)
