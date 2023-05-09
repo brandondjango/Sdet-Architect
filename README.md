@@ -273,6 +273,32 @@ Let's take a closer look.
 
 #### How does Locust work at a high level?
 
+Locust works by creating several users at a predetermined spawn rate, and having those users perform "tasks".  Tasks are usually some type of API call.  The time to perform tasks is tracked, and then shown in an easy to read and interactable report like this:
+
+![locust-chart.png](locust-chart.png)
+
+![locust-response-times.png](locust-response-times.png)
+
+In these screenshots, I have just performed a small load test against the [Dog API](https://dog.ceo/dog-api/)
+
+You can even look at the sample report yourself [here](sample-locust-report.html)!
+
+#### Is it that simple?
+
+Yes and no. 
+
+One of the strengths of locust is how easy it is to plug and play with.  The example I have above took me little to no time to get spun up once I learned about locust.
+
+However, like all our other automated tools, the tools themselves don't determine the key areas of your app to test. It is still up to the tester to determine if they are effectively testing their app.  On top of that, I really didn't cover a lot of opther great features locust has.
+
+We also have to consider sometimes a response time doesn't correlate to performance. If our system is posting messages to a bus or working asynchronously in some way, we're not going to get any actual metrics from our test with locust alone.
+
+Performance testing is a prime example of why it is important for developers and testers to work together on quality.  Sometimes there is no gold standard, you just have to make one for your system, and work together to find out where you stand now.
+
+### Distributed load testing
+
+
+
 
 
 
