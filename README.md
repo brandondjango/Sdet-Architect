@@ -218,6 +218,16 @@ Personally, I have used this approach and written 1000+ tests like this for one 
 
 You can see details of how I do this in [this sample project](https://github.com/brandondjango/API-Automation-Example).
 
+### Summary
+
+I think a lot of times people can view unit testing or contract testing to be the same as API testing, but this is not the case.
+
+Devs do not live in environments the same way testers do, and this invariably can lead to misses in bigger integrated systems in their lower level testing.
+
+It is important for Testers to have the ability to automate APIs to provide quick and real time health statuses when needed, whether that is in a CI/CD pipeline or at release time.
+
+Remember, if you write your tests smart, the biggest cognitive load you will have to carry will be the knowledge and testing of your application, not the maintenance of your automation suite.
+
 
 ---
 
