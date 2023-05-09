@@ -324,7 +324,7 @@ For instance, in the Locust Dog example:
 
 Master machine:
 ```
-locust.exe -f locust_dog_demo.py --conf .\config_files\master.conf
+locust.exe--conf .\config_files\master.conf
 ```
 
 Master config file:
@@ -346,7 +346,7 @@ headless = false
 
 Worker machine:
 ```
-locust.exe -f locust_dog_demo.py --conf .\config_files\worker.conf
+locust.exe --conf .\config_files\worker.conf
 ```
 
 Worker config file:
