@@ -214,7 +214,9 @@ If you examine this response, this is a multi level hash we're getting back, wit
 
 What we have here is a very robust step definition that searching for one case. And when you have several of these, they add up to be a strong suite of tests upon extrapolation.
 
-Personally, I have used this this approach and written 1000+ tests like this for one application.  When you have somethign like this, it is easy to see trends in functionality, helping you to pin-point bugs and specific behavior.
+Personally, I have used this approach and written 1000+ tests like this for one application.  When you have something like this, it is easy to see trends in functionality, helping you to pinpoint bugs and specific behavior.
+
+You can see details of how I do this in [this sample project](https://github.com/brandondjango/API-Automation-Example).
 
 
 ---
