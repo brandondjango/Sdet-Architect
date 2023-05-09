@@ -13,7 +13,11 @@
       1. [Free Tool: Selenium](#free-tool--selenium)
       2. [Paid Tool: Cypress](#paid-tool--cypress)
    2. [Example Projects](#example-web-automation-projects)
-5. [Mobile Testing](#mobile-and-smart-device-automation)
+5. [API Testing](#api-testing)
+   1. [Implementation](#implementation)
+      1. [Rest](#rest)
+   2. [Summary](#api-summary)
+6. [Mobile Testing](#mobile-and-smart-device-automation)
    1. [Appium](#appium)
       1. [Woah...](#woah-woah-woah---that-was-a-lot)
       2. [Why Bother](#so-why-bother-if-its-so-hard-to-setup)
@@ -218,7 +222,7 @@ Personally, I have used this approach and written 1000+ tests like this for one 
 
 You can see details of how I do this in [this sample project](https://github.com/brandondjango/API-Automation-Example).
 
-### Summary
+### API Summary
 
 I think a lot of times people can view unit testing or contract testing to be the same as API testing, but this is not the case.
 
