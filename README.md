@@ -467,9 +467,9 @@ There are a lot of ways to do load testing! It's up to you and your teams to set
 
 [Locust Dog API Project](https://github.com/brandondjango/LocustDogDemo)
 
-## Other Important Concepts
-
 ---
+
+## Other Important Concepts
 
 ### Parallelization
 
