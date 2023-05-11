@@ -30,6 +30,7 @@
       2. [Is it that simple](#is-it-that-simple)
    2. [Distributed Load Test](#distributed-load-testing)
       1. [Locust Distributed Load Testing](#locust-distributed-load-testing)
+   3. [Sample Performance Test Project](#sample-performance-test-project)
 7. [Other Important Concepts](#other-important-concepts)
    1. [Parallelization](#parallelization)
 
