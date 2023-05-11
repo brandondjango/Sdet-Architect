@@ -16,6 +16,7 @@
 5. [API Testing](#api-testing)
    1. [Implementation](#implementation)
       1. [Rest](#rest)
+      2. [gRPC](#grpc)
    2. [Summary](#api-summary)
 6. [Mobile Testing](#mobile-and-smart-device-automation)
    1. [Appium](#appium)
