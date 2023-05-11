@@ -29,6 +29,8 @@
       2. [Is it that simple](#is-it-that-simple)
    2. [Distributed Load Test](#distributed-load-testing)
       1. [Locust Distributed Load Testing](#locust-distributed-load-testing)
+7. [Other Important Concepts](#other-important-concepts)
+   1. [Parallelization](#parallelization)
 
 ## Purpose
 
@@ -447,3 +449,26 @@ There are a lot of ways to do load testing! It's up to you and your teams to set
 ## Sample Load test project:
 
 [Locust Dog API Project](https://github.com/brandondjango/LocustDogDemo)
+
+## Other Important Concepts
+
+### Parallelization
+
+Parallelization in the context of test automation simply means splitting the execution of your tests to run in parallel as opposed to sequentially.
+
+This increases the amount of computing you are doing at one time, but decreases the amount of time it takes for you tests to execute.
+
+I have an example of this in my WebApp Project using the parallel_cucumber library:
+
+>bundle exec parallel_cucumber features/ -n 5 -o '-t @only -r support/cucumber_env.rb -r features'
+
+In this command, I am running my tests in the "features" directory, with normal cucumber arguements in the "-o" parameter single quotes.
+
+"-n" is where I designate the number of threads the tests will execute in. In the command above, the execution of my tests would be split accross 5 threads.
+
+Something to keep in mind for parallelization is threads overwriting each other. What I mean by this is you need to make sure tests run in parallel do not overwrite or undo what happens in other threads.
+
+A good example of this is in report writing. If you're not careful, once your tests execute, you will only be left with the report of the last one. For that specific case, you can use a command like the following one to ensure this does not happen:
+
+>--format json --out=reports/REPORT_<%= Random.new_seed%>_<%= Time.now.strftime('%Y_%m_%d_%H_%M')%>.json
+
