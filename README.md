@@ -469,6 +469,8 @@ There are a lot of ways to do load testing! It's up to you and your teams to set
 
 ## Other Important Concepts
 
+---
+
 ### Parallelization
 
 Parallelization in the context of test automation simply means splitting the execution of your tests to run in parallel as opposed to sequentially.
