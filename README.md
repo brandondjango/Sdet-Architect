@@ -463,7 +463,7 @@ There are ways to integrate this with Docker as well, but that can be saved for 
 
 There are a lot of ways to do load testing! It's up to you and your teams to set the goals of your load tests, and make an actionable plan to get there. Personally I've found luck with Locust, but there are a lot of tools out there to use!
 
-## Sample Load test project:
+## Sample Performance test project:
 
 [Locust Dog API Project](https://github.com/brandondjango/LocustDogDemo)
 
