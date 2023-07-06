@@ -33,6 +33,8 @@
    3. [Sample Performance Test Project](#sample-performance-test-project)
 7. [Other Important Concepts](#other-important-concepts)
    1. [Parallelization](#parallelization)
+   2. [Accessibility Testing](#accessibility-testing)
+      1. [pa11y](#pa11y)
 
 ## Purpose
 
@@ -492,3 +494,57 @@ A good example of this is in report writing. If you're not careful, once your te
 
 >--format json --out=reports/REPORT_<%= Random.new_seed%>_<%= Time.now.strftime('%Y_%m_%d_%H_%M')%>.json
 
+### Accessibility Testing
+
+Accessibility is an experience often equated to simply passing Web Content Accessibility Guidelines(WCAG), but in my experience this is not always the case.
+
+Like other quality in an application, there is both qualitative and quantitative apporach to providing the best accessibility experience for your users.
+
+...However, while this is important to keep in mind, the quantitative side of things is one we can automate tests against. There are various tools for this, and one of my favorites is pa11y.
+
+#### pa11y
+
+[pa11y](https://github.com/pa11y/pa11y) is a command line tool that allows you to check webpages against WCAG.
+
+One particular thing I like about pa11y is that not only can you provide urls to it for fetching source code itself, it can ALSO check html files themselves.
+
+This is important because in many cases, webpages have a layer of authentication in front of them. But using pa11y with source code can help us bypass this issue.
+
+For example, lets say we had the following test:
+
+```
+  Scenario: Social Media Page WCAG compliant
+    Given I login to Facebook
+    When I navigate to "Brandon" Page
+    Then the page is WCAG compliant
+```
+
+Here we have a page with authentication in front of it. I cannot simply pass something like:
+
+```agsl
+pa11y "www.facebook.com/p/Brandon"
+```
+
+Instead, because we have test code that takes us to this page, we can do something like:
+
+```agsl
+Then(/^I should see no accessibility errors$/) do
+  #write current page source to test file
+  html_source_of_current_page = @browser.html
+  @fileHtml.puts(html_source_of_current_page)
+  #write source to test file for pa11y
+  root_dir = File.dirname(__dir__)
+  @fileHtml = File.new(root_dir + "/accessibilityTestFiles/test.html", "r")
+  @fileHtml.puts(html_source_of_current_page)
+  @fileHtml.close()
+  accessibility_file_path = File.expand_path(@fileHtml)
+  #run file through pa11y, gives us back a true or false depending on if it passed
+  passVariable = system("pa11y " + accessibility_file_path)
+  #validate
+  expect(passVariable).to (be true), "Expected page to be WWCAG compliant but it was not"
+end
+```
+
+This solution would help us scale very fast as we develop tests against other feature!
+
+Now of course there are errors we can ignore, there are several configs we can make. Possibilities go as far as you are willing to take them.
