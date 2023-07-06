@@ -13,19 +13,34 @@
       1. [Free Tool: Selenium](#free-tool--selenium)
       2. [Paid Tool: Cypress](#paid-tool--cypress)
    2. [Example Projects](#example-web-automation-projects)
-5. [Mobile Testing](#mobile-and-smart-device-automation)
+5. [API Testing](#api-testing)
+   1. [Implementation](#implementation)
+      1. [Rest](#rest)
+      2. [gRPC](#grpc)
+   2. [Summary](#api-summary)
+6. [Mobile Testing](#mobile-and-smart-device-automation)
    1. [Appium](#appium)
       1. [Woah...](#woah-woah-woah---that-was-a-lot)
       2. [Why Bother](#so-why-bother-if-its-so-hard-to-setup)
    2. [More...?](#more)
    3. [Example Mobile Projects](#example-mobile-projects-)
-6. [Performance Testing]()
+6. [Performance Testing](#performance-testing)
+   1. [Locust](#locust)
+      1. [How does Locust work at a high level?](#how-does-locust-work-at-a-high-level)
+      2. [Is it that simple](#is-it-that-simple)
+   2. [Distributed Load Test](#distributed-load-testing)
+      1. [Locust Distributed Load Testing](#locust-distributed-load-testing)
+   3. [Sample Performance Test Project](#sample-performance-test-project)
+7. [Other Important Concepts](#other-important-concepts)
+   1. [Parallelization](#parallelization)
 
 ## Purpose
 
 The purpose of this project is to show the types of projects and technologies I've worked on and written pertaining to software testing.  I want to do this so I can architect Software testing solutions.
 
 All the work here I've either written from scratch or worked within heavily, and should understand to a high degree.
+
+Also, no, ChatGPT wrote none of this :)
 
 ## Quality in the Context of Automated Software Testing
 
@@ -140,9 +155,102 @@ This might not be too bad if you for example only want to automate components of
 
 I personally have been in the Web Browser automation game since I started my career. Here are some examples of Web Browser automation I have on my github page using Selenium([Watir](http://watir.com/)).  They are in Ruby, but I have worked professionally in Java as well:
 
-- [Bare bones project that can serve as a starter for a Web App Automation project using Ruby, Watir, Cucumber](https://github.com/brandondjango/WebAppAutomation)
+- [Bare-bones project that can serve as a starter for a Web App Automation project using Ruby, Watir, Cucumber](https://github.com/brandondjango/WebAppAutomation)
 
 - [Name Game Testing project I did in 24 hours for a Job Interview Process](https://github.com/brandondjango/NameGameTesting)
+
+---
+
+## API Testing
+
+API Testing is very useful and can come in a couple different flavors protocol wise(think gRPC, REST, and HTTP).
+
+From a high level, writing these tests is pretty simple: we want to write atomic, repeatable, lightweight tests that are easy to write. 
+
+The reason we want them to be easy to write is because generally you want to write way more API tests than UI tests. This is because there should be way more test cases for APIs as opposed to UI, and they can run very fast. We want tests to be atomic so we are very specific in what we are testing, lightweight so maintaining and debugging are easy, and finally repeatable so we can track results over time. 
+
+### Implementation
+
+There are so many ways to implement API tests, but in my experience, the best way to approach the solution to automated API testing is to create a general solution for getting and storing API responses at the high script level, and make validate at a high level as well.
+
+Let's dig into that with a REST Ruby/Cucumber example:
+
+#### REST
+
+First of all, you might be asking why I'm using Cucumber, a plain language test framework for business cases here. That's a good question. In this case, it was simply because the team I was on preferred to use a framework we already all knew. Moving on...
+
+Let's look at a sample test:
+
+```
+  Scenario: List all breeds
+    #behind the scenes we are providing host url information
+    When the request is built for "breeds/list/all"
+    And the "get" request is sent
+    Then the response contains the key "beagle"
+    Then the response contains the key "retriever" that contains the value "golden" within the value for that key
+    Then the response contains the key "status" with the value "success"
+```
+Reading this test, Look how simple and understandable it is: 
+1. We built a request
+2. We sent the request
+3. We have a response we are validating
+
+At the high level, we have a test that is:
+
+1. Easy to understand
+2. Scalable
+3. is virtually atomic(or easy to make atomic)
+
+Let's look at the response we actually got back from that call:
+
+```
+{"message":{"affenpinscher":[],"african":[],"airedale":[],"akita":[],"appenzeller":[],"australian":["shepherd"],"basenji":[],"beagle":[],"bluetick":[],"borzoi":[],"bouvier":[],"boxer
+":[],"brabancon":[],"briard":[],"buhund":["norwegian"],"bulldog":["boston","english","french"],"bullterrier":["staffordshire"],"cattledog":["australian"],"chihuahua":[],"chow":[],"cl
+umber":[],"cockapoo":[],"collie":["border"],"coonhound":[],"corgi":["cardigan"],"cotondetulear":[],"dachshund":[],"dalmatian":[],"dane":["great"],"deerhound":["scottish"],"dhole":[],
+"dingo":[],"doberman":[],"elkhound":["norwegian"],"entlebucher":[],"eskimo":[],"finnish":["lapphund"],"frise":["bichon"],"germanshepherd":[],"greyhound":["italian"],"groenendael":[],
+"havanese":[],"hound":["afghan","basset","blood","english","ibizan","plott","walker"],"husky":[],"keeshond":[],"kelpie":[],"komondor":[],"kuvasz":[],"labradoodle":[],"labrador":[],"l
+eonberg":[],"lhasa":[],"malamute":[],"malinois":[],"maltese":[],"mastiff":["bull","english","tibetan"],"mexicanhairless":[],"mix":[],"mountain":["bernese","swiss"],"newfoundland":[],
+"otterhound":[],"ovcharka":["caucasian"],"papillon":[],"pekinese":[],"pembroke":[],"pinscher":["miniature"],"pitbull":[],"pointer":["german","germanlonghair"],"pomeranian":[],"poodle
+":["medium","miniature","standard","toy"],"pug":[],"puggle":[],"pyrenees":[],"redbone":[],"retriever":["chesapeake","curly","flatcoated","golden"],"ridgeback":["rhodesian"],"rottweil
+er":[],"saluki":[],"samoyed":[],"schipperke":[],"schnauzer":["giant","miniature"],"segugio":["italian"],"setter":["english","gordon","irish"],"sharpei":[],"sheepdog":["english","shet
+land"],"shiba":[],"shihtzu":[],"spaniel":["blenheim","brittany","cocker","irish","japanese","sussex","welsh"],"spitz":["japanese"],"springer":["english"],"stbernard":[],"terrier":["a
+merican","australian","bedlington","border","cairn","dandie","fox","irish","kerryblue","lakeland","norfolk","norwich","patterdale","russell","scottish","sealyham","silky","tibetan","
+toy","welsh","westhighland","wheaten","yorkshire"],"tervuren":[],"vizsla":[],"waterdog":["spanish"],"weimaraner":[],"whippet":[],"wolfhound":["irish"]},"status":"success"}
+```
+
+If you examine this response, this is a multi level hash we're getting back, with Arrays withing hashes.  You cannot see this here, but within the step definition, we account for that. Because our tests are robust, even if that array were ten levels deepers, we would still find the values we're seeking.
+
+What we have here is a very robust step definition that searching for one case. And when you have several of these, they add up to be a strong suite of tests upon extrapolation.
+
+Personally, I have used this approach and written 1000+ tests like this for one application.  When you have something like this, it is easy to see trends in functionality, helping you to pinpoint bugs and specific behavior.
+
+You can see details of how I do this in [this sample project](https://github.com/brandondjango/API-Automation-Example).
+
+#### gRPC
+
+gRPC is a protocol used by microservices, usually in cloud environments.
+
+If you find yourself needing to automate gRPC calls, the process is mostly the same, but will vary across languages as far as execution.
+
+The process is as follows:
+
+1. Obtain proto file. This is used to define the "language" the microservices are talking with.
+2. From there, you will use some plugin to generate a class in your language. This class will contain all the methods you will need to call to interact with the microservice.
+3. Abstract the autogenerated class to your own class. This will allow you to create classes that make the grpc call in a way that is readable to you, as opposed to auto generated code.
+4. Write your tests with your abstracted classes.
+
+I'm not going to go into too much detail here, but in my automation project linked below, I have some grpc code to play with. Instructions included in project.
+
+
+### API Summary
+
+I think a lot of times people can view unit testing or contract testing to be the same as API testing, but this is not the case.
+
+Devs do not live in environments the same way testers do, and this invariably can lead to misses in bigger integrated systems in their lower level testing.
+
+It is important for Testers to have the ability to automate APIs to provide quick and real time health statuses when needed, whether that is in a CI/CD pipeline or at release time.
+
+Remember, if you write your tests smart, the biggest cognitive load you will have to carry will be the knowledge and testing of your application, not the maintenance of your automation suite.
 
 
 ---
@@ -249,8 +357,138 @@ Nope. There are too many considerations to further expand on this topic *here*, 
 
 [Bare Bones Mobile Automation Project](https://github.com/brandondjango/MobileTestAutomation)
 
+---
+
 ## Performance Testing
 
-Admittedly, this is the 
+Admittedly, this is an area I do not have as much hands on experience as others, but I have used tools to simulate load tests and measure performance in a limited capacity.
 
+The biggest player in this field is jmeter as far as free tools.  It has a lot of functionality and out of the box functionality.  However, I know very little about it other than some cursory looks.
+
+As far as paid tools, I've seen some like Blaze meter that also offer some great features, which I also don't know a terrible amount about.
+
+If I know nothing about either of these, why did I include this section?
+
+One word: Locust.
+
+### Locust
+
+In my opinion, [Locust](https://locust.io/) is one of the tools I've found easiest to pick up and conceptually extrapolate on its capabilities.
+
+It is a free, open source Python performance tool. It offers an intuitive UI to read results, a system for distributed load testing, and it's capabilities extend as far as your Python skills will let you!
+
+Let's take a closer look.
+
+#### How does Locust work at a high level?
+
+Locust works by creating several users at a predetermined spawn rate, and having those users perform "tasks".  Tasks are usually some type of API call.  The time to perform tasks is tracked, and then shown in an easy to read and interactable report like this:
+
+![locust-chart.png](locust-chart.png)
+
+![locust-response-times.png](locust-response-times.png)
+
+In these screenshots, I have just performed a small load test against the [Dog API](https://dog.ceo/dog-api/)
+
+You can even look at the sample report yourself [here](sample-locust-report.html)!
+
+#### Is it that simple?
+
+Yes and no. 
+
+One of the strengths of locust is how easy it is to plug and play with.  The example I have above took me little to no time to get spun up once I learned about locust.
+
+However, like all our other automated tools, the tools themselves don't determine the key areas of your app to test. It is still up to the tester to determine if they are effectively testing their app.  **On top of that**, I really didn't cover a lot of other great features locust has. There are a lot of other cool ways to leverage Locust to get the metrics you are looking for.
+
+We also have to consider sometimes a response time doesn't correlate to performance. If our system is posting messages to a bus or working asynchronously in some way, we're not going to get any actual metrics from our test with locust alone.
+
+Performance testing is a prime example of why it is important for developers and testers to work together on quality.  Sometimes there is no gold standard, you just have to make one for your system, and work together to find out where you stand now.
+
+### Distributed Load testing
+
+When executing performance testing, a lot of times you need to generate a "load" on the your system to discover the boundaries of its capabilities.  This can be hard to do on one machine, so Distributed Load Testing can be a tool in your arsenal to help overcome this problem.
+
+So what is Distributed Load Test? Put simply, it's when you recruit multiple machines to help you perform your test:
+
+![distributed-load-testing.png](distributed-load-testing.png)
+
+In this particular screenshot, you can see one machine would serve as the "master" machine(gathering metrics, providing parameters to the workers, compiling report, etc.), while the workers actually place the load on the system.
+
+#### Locust Distributed Load Testing
+
+Locust provides ways to do this as well! Once you have The master and worker machines on the same network/connected in someway, you simply need to:
+
+1. Have Locust installed on your machine with the appropriate pre reqs
+2. Have your locust project on both machines
+3. Start the locust projects with the appropriate configs
+
+For instance, in the Locust Dog example:
+
+Master machine:
+```
+locust.exe--conf .\config_files\master.conf
+```
+
+Master config file:
+```
+[master conf]
+master = true
+expect-workers = 1
+
+[runtime settings]
+#host = "https://dog.ceo/api/"
+#Number of users must always be greater than:
+#the number of user classes multiplied by the number of workers
+users = 3
+spawn-rate = .5
+locustfile = "./locust_dog_demo.py"
+run-time = 5s
+headless = false
+```
+
+Worker machine:
+```
+locust.exe --conf .\config_files\worker.conf
+```
+
+Worker config file:
+```
+[worker conf]
+worker = true
+locustfile = "./locust_dog_demo.py"
+#host = "https://dog.ceo/api/"
+```
+
+There are ways to integrate this with Docker as well, but that can be saved for another time.
+
+## Summary
+
+There are a lot of ways to do load testing! It's up to you and your teams to set the goals of your load tests, and make an actionable plan to get there. Personally I've found luck with Locust, but there are a lot of tools out there to use!
+
+## Sample Performance test project:
+
+[Locust Dog API Project](https://github.com/brandondjango/LocustDogDemo)
+
+---
+
+## Other Important Concepts
+
+### Parallelization
+
+Parallelization in the context of test automation simply means splitting the execution of your tests to run in parallel as opposed to sequentially.
+
+This increases the amount of computing you are doing at one time, but decreases the amount of time it takes for you tests to execute.
+
+I have an example of this in my WebApp Project using the parallel_cucumber library:
+
+>bundle exec parallel_cucumber features/ -n 5 -o '-t @only -r support/cucumber_env.rb -r features'
+
+In this command, I am running my tests in the "features" directory, with normal cucumber arguements in the "-o" parameter single quotes.
+
+"-n" is where I designate the number of threads the tests will execute in. In the command above, the execution of my tests would be split accross 5 threads.
+
+Something to keep in mind for parallelization is threads overwriting each other. What I mean by this is you need to make sure tests run in parallel do not overwrite or undo what happens in other threads.
+
+A good example of this is in report writing. If you're not careful, once your tests execute, you will only be left with the report of the last one. For that specific case, you can use a command like the following one to ensure this does not happen:
+
+>--format json --out=reports/REPORT_<%= Random.new_seed%>_<%= Time.now.strftime('%Y_%m_%d_%H_%M')%>.json
 
