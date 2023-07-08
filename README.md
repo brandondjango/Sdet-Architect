@@ -532,18 +532,27 @@ Then(/^I should see no accessibility errors$/) do
   #write current page source to test file
   html_source_of_current_page = @browser.html
   @fileHtml.puts(html_source_of_current_page)
+  
   #write source to test file for pa11y
   root_dir = File.dirname(__dir__)
   @fileHtml = File.new(root_dir + "/accessibilityTestFiles/test.html", "r")
   @fileHtml.puts(html_source_of_current_page)
   @fileHtml.close()
   accessibility_file_path = File.expand_path(@fileHtml)
+  
   #run file through pa11y, gives us back a true or false depending on if it passed
   passVariable = system("pa11y " + accessibility_file_path)
+  
   #validate
   expect(passVariable).to (be true), "Expected page to be WWCAG compliant but it was not"
 end
 ```
+
+Some quick things to note: 
+- pa11y returns a true and false here depending on how your accessibility check did
+- You can pass urls to pa11y
+- you can make pa11y to only review portions of your html
+- you can even ignore certain errors
 
 This solution would help us scale very fast as we develop tests against other feature!
 
