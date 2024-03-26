@@ -136,13 +136,17 @@ Selenium is the biggest player in this space. It is a **free** open source tool 
 
 This can allow you to be pretty flexible in your projects, but requires a greater degree of know how from maintainers of your test project, especially if you want to manage things like parallelzation and test reports efficiently.
 
-#### Paid Tool: Cypress
+#### "Paid" Tool: Cypress
 
 On the other end of the spectrum, there are a lot of paid tools made specifically with testers in mind. [Cypress](https://www.cypress.io/) is the biggest up and comer taking over this space.
 
-The best analogy I've heard comparing Selenium to Cypress is if Selenium is a tool that remote controls a browser, Cypress is a tool embedded within a browser. 
+The best analogies I've heard comparing Selenium to Cypress is if Selenium is a tool that remote controls a browser, Cypress is a tool embedded within a browser. 
 
-The major con of Cyrpess is you have to pay for licences to have your test results stored over time. The community isn't as mature as Selenium's, and Cypress specifically does not support Firefox.
+The major con of Cyrpess is you have to pay for licences to have your test results stored over time. The community isn't as mature as Selenium's.
+
+Since I originally made this project, Cypress has made a lot of upgrades. In my experience though, it's really a front end forward tool. For instance it doesn't still strike me as a tool to combine front and back end funcitonality within a singular test.
+
+However, not my biggest area of professional expertise.
 
 ### Example Web Automation Projects
 
@@ -153,6 +157,8 @@ I have been in the Web Browser automation space since I started my career. Here 
 - [Name Game Testing project I did in 24 hours for a Job Interview Process](https://github.com/brandondjango/NameGameTesting)
 
 - [Typescript/Javascript, Cucumber + Selenium(WIP)](https://github.com/brandondjango/TypeScript_WebAppAutomation)
+
+- [Cypress Playground](https://github.com/brandondjango/WebAppCyrpressAutomation)
 ---
 
 ## API Testing
