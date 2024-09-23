@@ -10,8 +10,9 @@
    4. [External Dependencies](#external-dependencies)
 4. [Web Application Testing](#web-application-software-automation)
    1. [Tool choice for Webdriver Automation](#tool-choice-for-webdriver-automation)
-      1. [Free Tool: Selenium](#free-tool--selenium)
-      2. [Paid Tool: Cypress](#paid-tool--cypress)
+      1. [Selenium](#selenium)
+      2. [Cypress](#cypress)
+      3. [Playwright](#playwright)
    2. [Example Projects](#example-web-automation-projects)
 5. [API Testing](#api-testing)
    1. [Implementation](#implementation)
@@ -130,23 +131,21 @@ Web Application Testing is the biggest use case of automated testing in the soft
 
 In our diagram above, we mentioned how external dependencies fit in a Test Project architecture. Because WebApps(and "derivative" technology such as Hybrid mobile apps) are so popular, browser automation tool choice play a big part in determining the direction of your Automation project.
 
-#### Free Tool: Selenium
+#### Selenium
 
 Selenium is the biggest player in this space. It is a **free** open source tool that has been around pretty much since the beginning browser automation.  However, Selenium is not actually built for test automators in mind.  Rather, you combine the use of this tool with other libraries and conventions to build a WebApp test suites.
 
 This can allow you to be pretty flexible in your projects, but requires a greater degree of know how from maintainers of your test project, especially if you want to manage things like parallelzation and test reports efficiently.
 
-#### "Paid" Tool: Cypress
+#### Cypress
 
-On the other end of the spectrum, there are a lot of paid tools made specifically with testers in mind. [Cypress](https://www.cypress.io/) is the biggest up and comer taking over this space.
-
-The best analogies I've heard comparing Selenium to Cypress is if Selenium is a tool that remote controls a browser, Cypress is a tool embedded within a browser. 
+Of the best analogies I've heard comparing Selenium to Cypress is if Selenium is a tool that remote controls a browser, Cypress is a tool embedded within a browser. 
 
 The major con of Cyrpess is you have to pay for licences to have your test results stored over time. The community isn't as mature as Selenium's.
 
-Since I originally made this project, Cypress has made a lot of upgrades. In my experience though, it's really a front end forward tool. For instance it doesn't still strike me as a tool to combine front and back end funcitonality within a singular test.
+#### Playwright
 
-However, not my biggest area of professional expertise.
+In practice not entirely different from selenium, but it is faster performance wise than Selenium because it is integrated via DevTools protocols(as opposed to Webdriver protocols).
 
 ### Example Web Automation Projects
 
@@ -159,6 +158,8 @@ I have been in the Web Browser automation space since I started my career. Here 
 - [Typescript/Javascript, Cucumber + Selenium(WIP)](https://github.com/brandondjango/TypeScript_WebAppAutomation)
 
 - [Cypress Playground](https://github.com/brandondjango/WebAppCyrpressAutomation)
+
+- [Python Futbol Data Webscraper](https://github.com/brandondjango/FootballDataScraper)
 ---
 
 ## API Testing
