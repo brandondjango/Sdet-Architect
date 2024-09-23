@@ -13,6 +13,7 @@
       1. [Selenium](#selenium)
       2. [Cypress](#cypress)
       3. [Playwright](#playwright)
+      4. [Summary of Browser Tools](#summary-of-browser-tools)
    2. [Example Projects](#example-web-automation-projects)
 5. [API Testing](#api-testing)
    1. [Implementation](#implementation)
@@ -32,7 +33,11 @@
    2. [Distributed Load Test](#distributed-load-testing)
       1. [Locust Distributed Load Testing](#locust-distributed-load-testing)
    3. [Sample Performance Test Project](#sample-performance-test-project)
-7. [Other Important Concepts](#other-important-concepts)
+7. [Running Automation](#running-automation)
+   1. [Docker](#docker)
+   2. [Azure Devops -> Pipelines](#azure-devops---pipelines)
+   3. [Jenkins](#jenkins)
+8. [Other Important Concepts](#other-important-concepts)
    1. [Parallelization](#parallelization)
    2. [Accessibility Testing](#accessibility-testing)
       1. [pa11y](#pa11y)
@@ -146,6 +151,23 @@ The major con of Cyrpess is you have to pay for licences to have your test resul
 #### Playwright
 
 In practice not entirely different from selenium, but it is faster performance wise than Selenium because it is integrated via DevTools protocols(as opposed to Webdriver protocols).
+
+Here is a table showing some of the differences:
+
+#### Summary of browser tools
+
+| Feature                 | Playwright                                      | Selenium                                     | Cypress                                      |
+|-------------------------|------------------------------------------------|---------------------------------------------|---------------------------------------------|
+| **Supported Browsers**   | Chromium, Firefox, WebKit (Safari)             | Chrome, Firefox, Safari, Edge, IE, Opera    | Chromium-based browsers (Chrome, Edge)      |
+| **Installation**         | Easy setup, downloads browsers automatically   | More manual setup required (browser drivers)| Easy setup, browsers included               |
+| **Performance**          | Faster due to direct browser control           | Slower due to WebDriver protocol            | Fast, but limited to Chromium-based browsers|
+| **API**                  | Simple, modern API with network control        | Older, more verbose API                     | Easy-to-use API, especially for web testing |
+| **Parallel Testing**     | Native support via browser contexts            | Requires setup via external tools           | Native support via Dashboard, CI support    |
+| **Network Interception** | Built-in                                        | Needs third-party tools                     | Built-in support for network stubbing       |
+| **Headless Mode**        | Fast and efficient                             | Slower                                      | Supports headless, but Chromium-only        |
+| **Mobile Emulation**     | Supports emulation, but not real devices       | Supports real devices via Appium            | Supports mobile viewports, but no real devices|
+| **Maturity**             | New, rapidly growing, backed by Microsoft      | Mature, widely supported                    | Growing fast, very popular for frontend testing|
+
 
 ### Example Web Automation Projects
 
@@ -467,6 +489,32 @@ There are a lot of ways to do load testing! It's up to you and your teams to set
 
 ---
 
+## Running automation
+
+There are several ways to run automated tests other than on your local machine.
+
+### Docker
+
+Docker is a tool that allows you to make lightweight, portable environments for your software to run on. 
+
+Containers are built from images, images are built from Dockerfiles, such as [this one from my Football Data Scraper project](https://github.com/brandondjango/FootballDataScraper/blob/master/Dockerfile).
+
+This particular Dockerfile should install all the prerequisites of my Webscraper api, and make the api accessible.
+
+### Azure Devops -> Pipelines
+
+Azure devops Pipelines is a CI/CD tool that essentially allows you to run projects in the context of Azure Devops.
+
+For instance, in my professional career I have used Azure devops to create pipelines to run automated tests and create data, while having access to agents within my organization and have access to protected variables stores within Azure.
+
+There is a little less control of these pipelines in my professional experience as far as the specs of your agents, because usually organizations have final control of the agents/type of agents available to you.
+
+### Jenkins
+
+Jenkins is an open source CI/CD tool muhc like Azure Devops. Not going to waste time on specifics, but if you're using Jenkins you will not have the same support Azure would give you, so your immediate org will have to support you if you have issues.
+
+I have used Jenkins to host Appium mobile labs because the machines hosting mobile automation had to be configured in a very particular way, that made Docker a bit more difficult to use. In addition, scalibility in this case wasn't a driving factor.
+
 ## Other Important Concepts
 
 ### Parallelization
@@ -552,3 +600,4 @@ Some quick things to note:
 This solution would help us scale very fast as we develop tests against other feature!
 
 Now of course there are errors we can ignore, there are several configs we can make. Possibilities go as far as you are willing to take them.
+
