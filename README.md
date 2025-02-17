@@ -44,9 +44,31 @@
 
 ## Purpose
 
-The purpose of this project is to show the types of projects and technologies I've worked on and written pertaining to software testing.  I want to do this so I can architect Software testing solutions.
+When I started this project, I had the intention of using it to back up my resume with real examples showing what I can do. I thought if I could provide examples of my work and throw some screenshots together, it would really show I am a capable tech professional.
 
-All the work here I've either written from scratch or worked within heavily, and understand to a high degree.
+After some 9-10 years in tech later, I've found nobody cares about that.  And I found out first hand. 
+
+In summer 2024, my company's future was uncertain. We'd had 3 rounds of layoffs within 18 months, and there were rumors of an acquistion. I knew not all employees would make that transition.
+
+I applied to jobs. Unlike only 2-3 years before, callbacks were few. I only got one real interview. It was for a staff level position, a level higher than what I was at surprisingly. However, my qualifications/techstack fit to a tee. I even aced the interview with the CTO.
+
+Easy.
+
+Then I met with the staff level software engineer. And he did not ask me a single technical question. Even when I tried to pivot to showing examples of what I can do, he responded with something I haven't forgotten:
+
+"Anyone can throw some code together."
+
+He's right.
+
+While by no means did I "bomb" this interview, I realized I didn't know my own story inside and out. I couldn't tell them my story effectively and why I felt I could be a staff level leader for their QA department. 
+
+I didn't get the job.
+
+After the acquisition, I actually kept my job, it even came with a raise. But that interview has stuck with me. I've had more conversations other tech professionals that has only confirmed this newfound outlook.
+
+While this project doesn't tell my story, I view it now as a part of it.  
+
+...And a lot of it is still true, so I'll keep it up.
 
 ## Quality in the Context of Automated Software Testing
 
@@ -511,7 +533,7 @@ There is a little less control of these pipelines in my professional experience 
 
 ### Jenkins
 
-Jenkins is an open source CI/CD tool muhc like Azure Devops. Not going to waste time on specifics, but if you're using Jenkins you will not have the same support Azure would give you, so your immediate org will have to support you if you have issues.
+Jenkins is an open source CI/CD tool much like Azure Devops. Not going to waste time on specifics, but if you're using Jenkins you will not have the same support Azure would give you, so your immediate org will have to support you if you have issues.
 
 I have used Jenkins to host Appium mobile labs because the machines hosting mobile automation had to be configured in a very particular way, that made Docker a bit more difficult to use. In addition, scalibility in this case wasn't a driving factor.
 
